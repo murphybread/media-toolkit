@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Media Toolkit</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Media Toolkit</h1>
+      <p class="subtitle">Drag & drop or select a file to convert</p>
+    </header>
+
+    <!-- Drop Zone -->
+    <div id="dropZone" class="drop-zone">
+      <div class="drop-zone__inner">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="17 8 12 3 7 8"/>
+          <line x1="12" y1="3" x2="12" y2="15"/>
+        </svg>
+        <p>Drop image here or <label for="fileInput" class="browse-link">browse</label></p>
+        <input type="file" id="fileInput" accept="image/*" hidden>
+      </div>
+    </div>
+
+    <!-- File Info Panel (hidden until upload) -->
+    <div id="fileInfoPanel" class="panel hidden">
+      <h2>File Info</h2>
+      <div class="file-meta">
+        <div class="meta-row">
+          <span class="meta-label">Name</span>
+          <span id="fileName" class="meta-value"></span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-label">Format</span>
+          <span id="fileFormat" class="meta-value"></span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-label">Size</span>
+          <span id="fileSize" class="meta-value"></span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-label">Dimensions</span>
+          <span id="fileDimensions" class="meta-value"></span>
+        </div>
+      </div>
+
+      <!-- Naming Options -->
+      <div class="naming-section">
+        <h3>Output Naming</h3>
+        <div class="naming-fields">
+          <div class="naming-field">
+            <label for="prefixInput">Prefix</label>
+            <input type="text" id="prefixInput" placeholder="e.g. thumb_">
+          </div>
+          <div class="naming-preview">
+            <span id="namePreview" class="preview-text"></span>
+          </div>
+          <div class="naming-field">
+            <label for="postfixInput">Postfix</label>
+            <input type="text" id="postfixInput" placeholder="e.g. _compressed">
+          </div>
+        </div>
+      </div>
+
+      <!-- Conversion Options -->
+      <h3>Convert To</h3>
+      <div id="formatOptions" class="format-grid"></div>
+
+      <!-- Action -->
+      <div class="actions">
+        <button id="convertBtn" class="btn-primary" disabled>Convert Selected</button>
+        <button id="resetBtn" class="btn-secondary">Reset</button>
+      </div>
+    </div>
+
+    <!-- Results Panel -->
+    <div id="resultsPanel" class="panel hidden">
+      <h2>Results</h2>
+      <div id="resultsList" class="results-list"></div>
+    </div>
+
+    <!-- Loading overlay -->
+    <div id="loadingOverlay" class="loading-overlay hidden">
+      <div class="spinner"></div>
+      <p>Converting...</p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
