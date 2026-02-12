@@ -16,6 +16,14 @@
 - **Link Format:** Use the following format for Markdown file links: [filename:start_line-end_line](relative_path#Lstart_line-Lend_line).
 - **Value Masking (Format-Preserving):** When showing partial real values (where masking is required), never keep the original first 4 characters. Generate a synthetic 4-character prefix matching the format (e.g., hex -> 1a2b...). Preserve only the type/pattern (numeric/alnum/uuid/email).
 
+## Refactoring & Structure
+
+- **Split Trigger:** Do not use line count as a hard threshold. Split when a file's responsibility cannot be described in a single sentence without "and." If it requires "A and B," it is a candidate for splitting.
+- **Split Unit:** Every file must have a one-line Responsibility comment at the top describing what it exclusively handles (e.g., // Responsibility: Handles notification channel selection and dispatch only). The split reason itself belongs in the commit message, not in the file.
+- **Merge Back:** If a single feature change requires opening more than 3 files, or if an intermediate layer only delegates without adding its own logic, treat it as over-separation. Merge back and document the reason in the commit message.
+- **Central Registry:** Cross-cutting concerns (validation rules, error codes, constants, shared configurations) must reside in a dedicated directory per concern type (e.g., validation/, constants/). Within that directory, split files by domain (e.g., UserValidation, OrderValidation). Use the Common prefix for non-domain-specific shared rules (e.g., CommonValidation, CommonConstants).
+- **Naming & Navigation:** Use domain-based naming for packages and files. Pattern: {Domain}{Concern} for domain-specific (UserValidation), Common{Concern} for shared (CommonValidation). A new team member should locate any file by knowing only the domain name and concern type.
+
 ---
 
 # [제목]
